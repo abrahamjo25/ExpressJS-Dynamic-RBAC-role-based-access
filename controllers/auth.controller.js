@@ -24,3 +24,36 @@ export const register = async (req, res, next) => {
     next(errorHandler(400, "Fill all required fields"));
   }
 };
+
+export const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  if (email && password) {
+    try {
+      const user = await User.findOne({ email });
+
+      if (user) {
+        if (bcryptjs.compareSync(password, user.password)) {
+          const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+          });
+          const { password: pass, ...restInfo } = user._doc;
+
+          res
+            .status(200)
+            .cookie("accessToken", token, {
+              httpOnly: true,
+            })
+            .json(restInfo);
+        } else {
+          next(errorHandler(400, "Invalid password"));
+        }
+      } else {
+        next(errorHandler(400, "Invalid username"));
+      }
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    next(errorHandler(400, "Fill all required fields"));
+  }
+};

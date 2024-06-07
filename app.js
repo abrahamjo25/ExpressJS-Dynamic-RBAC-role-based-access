@@ -2,7 +2,7 @@ import express, { json } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import signupRoute from "./routes/auth.route.js";
+import authRoute from "./routes/auth.route.js";
 
 dotenv.config();
 const app = express();
@@ -26,7 +26,7 @@ app.listen(port, (error) => {
   }
 });
 
-app.use("/api/auth", signupRoute);
+app.use("/api/auth", authRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
