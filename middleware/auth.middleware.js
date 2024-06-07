@@ -3,7 +3,7 @@ import User from "../models/user.models.js";
 import { errorHandler } from "../utils/error.js";
 import Permission from "../models/permission.models.js";
 
-const authMiddleware = async (req, res, next) => {
+const authenticate = async (req, res, next) => {
   try {
     const permission = await Permission.findOne({
       route: req.path,
@@ -35,4 +35,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-export default authMiddleware;
+export default authenticate;
