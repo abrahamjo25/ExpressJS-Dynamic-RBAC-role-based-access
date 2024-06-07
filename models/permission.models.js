@@ -14,7 +14,8 @@ const permissionSchema = new mongoose.Schema({
     method :{
         type:String,
         required:true
-    }
+    },
+    requiresAuth: { type: Boolean, default: true }
 },{timestamps:true});
 
 const Permission = mongoose.model("Permission",permissionSchema);
