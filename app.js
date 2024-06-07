@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import authRoute from "./routes/auth.route.js";
-
+import adminRoute from "./routes/admin.route.js";
 dotenv.config();
 const app = express();
 
@@ -27,6 +27,7 @@ app.listen(port, (error) => {
 });
 
 app.use("/api/auth", authRoute);
+app.use("/api/admin", adminRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

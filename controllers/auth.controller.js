@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import User from "../models/user.models.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 
@@ -36,14 +36,9 @@ export const login = async (req, res, next) => {
           const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
             expiresIn: "1h",
           });
-          const { password: pass, ...restInfo } = user._doc;
+          const { password: pass, ...userData } = user._doc;
 
-          res
-            .status(200)
-            .cookie("accessToken", token, {
-              httpOnly: true,
-            })
-            .json(restInfo);
+          res.status(200).json({token, userData});
         } else {
           next(errorHandler(400, "Invalid password"));
         }
