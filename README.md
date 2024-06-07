@@ -10,8 +10,8 @@ Implement dynamic Role-based Access Control (RBAC) in Express JS REST API.
 #Testing with Postman  
 #Register a user:  
 
-# echo(POST /api/auth/register  
-#Body: { "username": "admin","email":"abrahamjo25@gmail.com", "password": "admin@123" }  
+# echo("POST /api/auth/register  
+#Body: { "username": "admin","email":"abrahamjo25@gmail.com", "password": "admin@123" }  "
 )
 
 #Login:  
