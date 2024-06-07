@@ -1,26 +1,31 @@
+import Permission from "../models/permission.models.js";
 import { errorHandler } from "../utils/error.js";
 const authorize = (route, method) => {
   return async (req, res, next) => {
-    return new Promise((resolve, reject) => {
+    try {
       const user = req.user;
+      const permission = await Permission.findOne({
+        route: route,
+        method: method,
+      });
+      if (!permission) {
+        return next(errorHandler(404, "Route not found"));
+      }
       const isAuthorized = user.roles.some((role) =>
         role.permissions.some(
-          (permission) =>
-            permission.route === route && permission.method === method
+          (perm) => perm.route === route && perm.method === method
         )
       );
       if (isAuthorized) {
-        resolve();
+        next();
       } else {
-        next(errorHandler(403, "Access denied"));
+        next(
+          errorHandler(403, "User has no access to the requested resource.")
+        );
       }
-    })
-    .then(() => {
-      next();
-    })
-    .catch((error) => {
-      next(errorHandler(403, error.message));
-    });
+    } catch (err) {
+      next(err);
+    }
   };
 };
 

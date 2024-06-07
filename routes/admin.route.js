@@ -20,29 +20,29 @@ const router = express.Router();
 //Roles
 router.get(
   "/roles",
-  // authenticate,
-  // authorize("/api/admin/roles", "GET"),
+  authenticate,
+  authorize("/api/admin/roles", "GET"),
   getRoles
 );
 
 router.get(
   "/role/:id",
-  // authenticate,
-  // authorize("/api/admin/role/:id", "GET"),
+  authenticate,
+  authorize("/api/admin/role/:id", "GET"),
   getRolesById
 );
 
 router.post(
   "/role",
-  // authenticate,
-  // authorize("/api/admin/role", "POST"),
+  authenticate,
+  authorize("/api/admin/role", "POST"),
   createRole
 );
 
 router.put(
   "/role/:id",
-  authenticate,
-  authorize("/api/admin/role/:id", "PUT"),
+  // authenticate,
+  // authorize("/api/admin/role/:id", "PUT"),
   updateRoles
 );
 
@@ -56,8 +56,8 @@ router.delete(
 //Permissions
 router.get(
   "/permission",
-  // authenticate,
-  // authorize("/api/admin/permission", "GET"),
+  authenticate,
+  authorize("/api/admin/permission", "GET"),
   getPermissions
 );
 
@@ -91,8 +91,8 @@ router.delete(
 
 router.post(
   "/assign-roles/:id",
-  // authenticate,
-  // authorize("/api/admin/assign-roles", "POST"),
+  authenticate,
+  authorize("/api/admin/assign-roles", "POST"),
   assignRoles
 );
 
