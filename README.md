@@ -25,9 +25,14 @@ Body: { "email": "abrahamjo25@gmail.com", "password": "admin@123" }
 #Create a Permission:  
 
 ```js
+eg 1
 POST /api/admin/permission  
 Headers: Authorization: Bearer <token>  
-Body: { "name": "Create Role", "route": "/api/admin/role", "method": "POST" }  
+Body: { "name": "Create Role", "route": "/api/admin/role", "method": "POST" }
+eg 2
+POST /api/admin/permission  
+Headers: Authorization: Bearer <token>  
+Body: { "name": "View Profile", "route": "/api/user/profile", "method": "GET" }
 ```
 #Create a Role:  
  ```js
